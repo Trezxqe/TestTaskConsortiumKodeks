@@ -13,8 +13,9 @@ function App() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const inVal = inputText.current.value
-    const regExpText = /[a-z]+/gmi;
+    let inVal = inputText.current.value;
+    inputText.current.value = '';
+    const regExpText = /[a-zа-я\D]+/gmi;
     const regExpNum = /\d/gmi;
     if (inVal.match(regExpText) && !inVal.match(regExpNum)) {
       setBlack([...black, inVal])
@@ -42,15 +43,15 @@ function App() {
           <option value="sortTime">Time to added</option>
           <option value="sortAlph">Alphabet</option>
         </select>
-      <div className="blocks inBlock">
-        <div className="block">
+      <div className="blocks">
+        <div className="block inBlock">
           <form onSubmit={handleClick}>
             <input type="text" ref={inputText} />
           </form>
         </div>
-        <div className="block black">black: {sort ? black.map(el => <p>{el}</p>) : blackAlph.map(el => <p>{el}</p>)}</div>
-        <div className="block purple">purple: {sort ? purple.map(el => <p>{el}</p>) : purpleAlph.map(el => <p>{el}</p>)}</div>
-        <div className="block peach">peach: {sort ? peach.map(el => <p>{el}</p>) : peachAlph.map(el => <p>{el}</p>)}</div>
+        <div className="block peach">peach: {sort ? peach.map(el => <p title={el}>{el}</p>) : peachAlph.map(el => <p>{el}</p>)}</div>
+        <div className="block purple">purple: {sort ? purple.map(el => <p title={el}>{el}</p>) : purpleAlph.map(el => <p>{el}</p>)}</div>
+        <div className="block black">black: {sort ? black.map(el => <p title={el}>{el}</p>) : blackAlph.map(el => <p>{el}</p>)}</div>
       </div>
     </div>
   );
